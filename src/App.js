@@ -6,10 +6,10 @@ import Home from './pages/Home.js'
 import { useState } from 'react';
 import RefreshHandler from './RefreshHandler.js';
 import Students from './pages/Students.js'
-import Teacher from './pages/Teacher.js'
+import Teacher from './pages/Teacher.js' // Teacher dashboard
 import Admin from './pages/Admin.js'
 import AddStudent from './pages/AddStudent.js'
-import Teachers from './pages/Teachers.js';
+import Teachers from './pages/Teachers.js'; // // Admin teacher management
 import AddTeacher from './pages/AddTeacher.js';
 import Courses from './pages/Courses.js';
 import AddCourse from './pages/AddCourse.js';
@@ -27,6 +27,9 @@ import Timetable from './pages/Timetable';
 import RoomAllocation from './pages/RoomAllocation.js';
 import SeatingArrangement from './pages/SeatingArrangement.js';
 import InvigilationDuty from './pages/InvigilationDuty.js';
+import TeacherExamSchedule from './pages/TeacherExamSchedule.js';
+import TeacherInvigilationDuties from './pages/TeacherInvigilationDuties.js';
+import TeacherAssignedRooms from './pages/TeacherAssignedRooms.js';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -265,6 +268,36 @@ function App() {
                 <PrivateRoute
                     element={<InvigilationDuty />}
                     allowedRoles={['admin']}
+                />
+            }
+        />
+
+        <Route
+            path="/teacher/exam-schedule"
+            element={
+                <PrivateRoute
+                    element={<TeacherExamSchedule />}
+                    allowedRoles={['teacher']}
+                />
+            }
+        />
+
+        <Route
+            path="/teacher/invigilation-duties"
+            element={
+                <PrivateRoute
+                    element={<TeacherInvigilationDuties />}
+                    allowedRoles={['teacher']}
+                />
+            }
+        />
+
+        <Route
+            path="/teacher/assigned-rooms"
+            element={
+                <PrivateRoute
+                    element={<TeacherAssignedRooms />}
+                    allowedRoles={['teacher']}
                 />
             }
         />

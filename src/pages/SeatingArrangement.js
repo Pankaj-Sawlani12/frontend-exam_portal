@@ -88,45 +88,60 @@ useEffect(() => {
 }, [printAttendance]);
 
 
-    const loadSeatingArrangement = async (cycleId) => {
-        if (!cycleId) {
-            setSeats([]);
-            return;
-        }
+        const loadSeatingArrangement = async (cycleId) => {
+    if (!cycleId) {
+        setSeats([]);
+        return;
+    }
 
-        try {
-            setLoading(true);
-            setError('');
-            setMessage('');
+    try {
+        setLoading(true);
+        setError('');
+        setMessage('');
 
-            const response = await fetch(
-                `${API_URL}/seating-arrangements?examCycle=${cycleId}`
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            throw new Error(
+                'Please log in again. Your JWT token is missing.'
             );
-
-            // const data = await response.json();
-                const data = await readApiResponse(response);
-
-            if (!response.ok || data.success === false) {
-                throw new Error(
-                    data.message || 'Unable to load seating arrangement.'
-                );
-            }
-
-            setSeats(data.seatingArrangement || []);
-            setSelectedRoom('all');
-
-            if (!(data.seatingArrangement || []).length) {
-                setMessage(
-                    'No saved seating arrangement found. Generate one first.'
-                );
-            }
-        } catch (err) {
-            setError(err.message || 'Failed to load seating arrangement.');
-            setSeats([]);
-        } finally {
-            setLoading(false);
         }
-    };
+
+        const response = await fetch(
+            `${API_URL}/seating-arrangements?examCycle=${encodeURIComponent(cycleId)}`,
+            {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        const data = await readApiResponse(response);
+
+        if (data.success === false) {
+            throw new Error(
+                data.message || 'Unable to load seating arrangement.'
+            );
+        }
+
+        setSeats(data.seatingArrangement || []);
+        setSelectedRoom('all');
+
+        if (!(data.seatingArrangement || []).length) {
+            setMessage(
+                'No saved seating arrangement found. Generate one first.'
+            );
+        }
+    } catch (err) {
+        setError(
+            err.message || 'Failed to load seating arrangement.'
+        );
+        setSeats([]);
+    } finally {
+        setLoading(false);
+    }
+};
 
     const handleCycleChange = (event) => {
         const cycleId = event.target.value;
@@ -152,10 +167,23 @@ useEffect(() => {
             setError('');
             setMessage('');
 
-            const response = await fetch(
-                `${API_URL}/seating-arrangements/generate?examCycle=${selectedCycle}`,
-                { method: 'POST' }
-            );
+            
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            throw new Error('Please log in again. Your JWT token is missing.');
+        }
+
+        const response = await fetch(
+            `${API_URL}/seating-arrangements/generate?examCycle=${encodeURIComponent(selectedCycle)}`,
+            {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
 
                 // const data = await response.json();
                 const data = await readApiResponse(response);

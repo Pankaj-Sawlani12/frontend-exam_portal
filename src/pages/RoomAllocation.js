@@ -32,6 +32,7 @@ function RoomAllocation() {
         fetchExamCycles();
     }, []);
 
+        
     const fetchAllocations = async () => {
         if (!selectedCycle) {
             setMessage('Please select an exam cycle.');
@@ -43,14 +44,27 @@ function RoomAllocation() {
         setTimetable([]);
 
         try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                throw new Error('Please log in again.');
+            }
+
             const response = await fetch(
-                `${API_URL}/timetable?examCycle=${selectedCycle}`
+                `${API_URL}/timetable?examCycle=${selectedCycle}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
             );
 
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message || 'Failed to load room allocations.');
+                throw new Error(
+                    data.message || 'Failed to load room allocations.'
+                );
             }
 
             const entries = Array.isArray(data.timetable)
@@ -60,14 +74,19 @@ function RoomAllocation() {
             setTimetable(entries);
 
             if (entries.length === 0) {
-                setMessage('No saved timetable found. Generate a timetable first.');
+                setMessage(
+                    'No saved timetable found. Generate a timetable first.'
+                );
             }
         } catch (error) {
-            setMessage(error.message || 'Unable to connect to the server.');
+            setMessage(
+                error.message || 'Unable to connect to the server.'
+            );
         } finally {
             setLoading(false);
         }
     };
+
 
     const getRooms = (item) => {
         if (!Array.isArray(item.classrooms)) {
