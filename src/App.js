@@ -30,9 +30,17 @@ import InvigilationDuty from './pages/InvigilationDuty.js';
 import TeacherExamSchedule from './pages/TeacherExamSchedule.js';
 import TeacherInvigilationDuties from './pages/TeacherInvigilationDuties.js';
 import TeacherAssignedRooms from './pages/TeacherAssignedRooms.js';
+import StudentDashboard from './pages/StudentDashboard.js';
+import StudentExamSchedule from './pages/StudentExamSchedule.js';
+import StudentSittingPlan from './pages/StudentSittingPlan.js';
+import StudentExamShifts from './pages/StudentExamShifts.js';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // Start from the stored token so refreshing a deep link (for example
+  // /student/sitting-plan) does not bounce through /login to the dashboard.
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    () => Boolean(localStorage.getItem('token'))
+  );
 
   const getDashboard = () => {
     const role = localStorage.getItem('role');
@@ -236,7 +244,37 @@ function App() {
             path="/student"
             element={
               <PrivateRoute
-                element={<Students />}
+                element={<StudentDashboard />}
+                allowedRoles={['student']}
+              />
+            }
+          />
+
+          <Route
+            path="/student/exam-schedule"
+            element={
+              <PrivateRoute
+                element={<StudentExamSchedule />}
+                allowedRoles={['student']}
+              />
+            }
+          />
+
+          <Route
+            path="/student/sitting-plan"
+            element={
+              <PrivateRoute
+                element={<StudentSittingPlan />}
+                allowedRoles={['student']}
+              />
+            }
+          />
+
+          <Route
+            path="/student/exam-shifts"
+            element={
+              <PrivateRoute
+                element={<StudentExamShifts />}
                 allowedRoles={['student']}
               />
             }

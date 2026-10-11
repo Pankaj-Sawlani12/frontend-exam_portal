@@ -1,0 +1,555 @@
+/* Student portal — builds on the look of Management.css */
+
+.sp-subtitle {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.sp-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.management-button.secondary {
+    background: white;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+}
+
+.management-button.secondary:hover {
+    background: #f1f5f9;
+}
+
+.management-button:focus-visible,
+.sp-chip-button:focus-visible,
+.sp-select:focus-visible {
+    outline: 3px solid rgba(71, 85, 105, 0.35);
+    outline-offset: 2px;
+}
+
+/* ---------- states ---------- */
+
+.sp-state {
+    background: white;
+    border-radius: 12px;
+    padding: 40px 24px;
+    text-align: center;
+    color: #64748b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-top: 20px;
+}
+
+.sp-state h3 {
+    margin: 0 0 8px;
+    color: #1e293b;
+}
+
+.sp-state p {
+    margin: 0 auto 16px;
+    max-width: 460px;
+    line-height: 1.6;
+}
+
+.sp-state .sp-state-icon {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.sp-state.error {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+}
+
+.sp-state.error h3 {
+    color: #991b1b;
+}
+
+.sp-skeleton {
+    height: 18px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #e2e8f0, #f1f5f9, #e2e8f0);
+    background-size: 200% 100%;
+    animation: sp-shimmer 1.3s infinite;
+}
+
+@keyframes sp-shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sp-skeleton { animation: none; }
+}
+
+/* ---------- dashboard ---------- */
+
+.sp-profile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.sp-profile-chip {
+    background: white;
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 13px;
+    color: #475569;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.sp-profile-chip strong {
+    color: #1e293b;
+}
+
+.sp-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.sp-stat {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.sp-stat span {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.sp-stat strong {
+    display: block;
+    margin-top: 4px;
+    color: #1e293b;
+    font-size: 30px;
+}
+
+.sp-next {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    box-shadow: 0 6px 18px rgba(30, 41, 59, 0.25);
+}
+
+.sp-next-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #cbd5e1;
+}
+
+.sp-next h2 {
+    margin: 6px 0 4px;
+    font-size: 24px;
+    color: white;
+}
+
+.sp-next p {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.sp-next-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 14px 28px;
+}
+
+.sp-next-facts dt {
+    font-size: 12px;
+    color: #cbd5e1;
+}
+
+.sp-next-facts dd {
+    margin: 2px 0 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sp-feature-meta {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 600;
+}
+
+/* ---------- pills ---------- */
+
+.sp-pill {
+    display: inline-block;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.sp-pill.today { background: #fef3c7; color: #92400e; }
+.sp-pill.soon { background: #dbeafe; color: #1e40af; }
+.sp-pill.later { background: #dcfce7; color: #166534; }
+.sp-pill.past { background: #e2e8f0; color: #475569; }
+.sp-pill.morning { background: #fef9c3; color: #854d0e; }
+.sp-pill.afternoon { background: #ffedd5; color: #9a3412; }
+.sp-pill.evening { background: #ede9fe; color: #5b21b6; }
+.sp-pill.pending { background: #fee2e2; color: #991b1b; }
+
+/* ---------- filters ---------- */
+
+.sp-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    background: white;
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 18px;
+}
+
+.sp-chip-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.sp-chip-button {
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #334155;
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sp-chip-button[aria-pressed='true'] {
+    background: #1e293b;
+    border-color: #1e293b;
+    color: white;
+}
+
+.sp-select {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: white;
+    color: #1e293b;
+    font-size: 14px;
+}
+
+.sp-table-wrap {
+    overflow-x: auto;
+}
+
+/* Keep the table readable on phones: scroll sideways instead of squeezing. */
+.sp-table-wrap .management-table {
+    min-width: 820px;
+}
+
+.sp-table-wrap .management-table td {
+    vertical-align: top;
+}
+
+.sp-table-wrap .management-table td small {
+    display: block;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.sp-row-past td {
+    color: #94a3b8;
+}
+
+.sp-row-today {
+    background: #fffbeb;
+}
+
+/* ---------- sitting plan ---------- */
+
+.sp-seat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+.sp-seat-card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.sp-seat-card.past {
+    opacity: 0.7;
+}
+
+.sp-seat-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.sp-seat-head h3 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 18px;
+}
+
+.sp-seat-head p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.sp-seat-key {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.sp-seat-key div {
+    background: #f1f5f9;
+    border-radius: 10px;
+    padding: 10px 12px;
+    text-align: center;
+}
+
+.sp-seat-key dt {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sp-seat-key dd {
+    margin: 2px 0 0;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.sp-room-line {
+    font-size: 14px;
+    color: #334155;
+}
+
+.sp-room-line strong {
+    font-size: 18px;
+    color: #1e293b;
+}
+
+.sp-seatmap {
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 12px;
+    background: #f8fafc;
+}
+
+.sp-seatmap-board {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #64748b;
+    background: #e2e8f0;
+    border-radius: 6px;
+    padding: 4px;
+    margin-bottom: 10px;
+}
+
+.sp-seatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+}
+
+.sp-seat {
+    aspect-ratio: 1 / 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: #e2e8f0;
+    color: #64748b;
+    font-size: 11px;
+}
+
+.sp-seat.mine {
+    background: #1e293b;
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.25);
+}
+
+.sp-seatmap-legend {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* ---------- shifts ---------- */
+
+.sp-day {
+    margin-bottom: 22px;
+}
+
+.sp-day-title {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0 0 10px;
+    color: #1e293b;
+}
+
+.sp-day-title small {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 400;
+}
+
+.sp-shift {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    display: grid;
+    grid-template-columns: minmax(200px, auto) 1fr auto;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 10px;
+    border-left: 5px solid #94a3b8;
+}
+
+.sp-shift.morning { border-left-color: #eab308; }
+.sp-shift.afternoon { border-left-color: #f97316; }
+.sp-shift.evening { border-left-color: #8b5cf6; }
+
+.sp-shift-time strong {
+    display: block;
+    font-size: 17px;
+    color: #1e293b;
+    white-space: nowrap;
+}
+
+.sp-shift-time span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.sp-shift-course strong {
+    display: block;
+    color: #1e293b;
+}
+
+.sp-shift-course span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.sp-report {
+    text-align: right;
+}
+
+.sp-report span {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+}
+
+.sp-report strong {
+    font-size: 20px;
+    color: #b45309;
+}
+
+.sp-note {
+    margin-top: 18px;
+    padding: 12px 16px;
+    background: #eff6ff;
+    border-radius: 10px;
+    color: #1e3a8a;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+    .sp-stats { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+    .sp-shift {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .sp-report { text-align: left; }
+
+    .sp-seat-grid { grid-template-columns: 1fr; }
+
+    .sp-next-facts { width: 100%; }
+}
+
+/* ---------- print (a clean copy of the page to carry to the exam) ---------- */
+
+@media print {
+    .sp-no-print { display: none !important; }
+
+    .management-page {
+        background: white;
+        padding: 0;
+        min-height: 0;
+    }
+
+    .management-header { margin-bottom: 12px; }
+
+    .sp-seat-card,
+    .sp-shift,
+    .sp-stat,
+    .management-card,
+    .sp-toolbar {
+        box-shadow: none;
+        border: 1px solid #cbd5e1;
+        break-inside: avoid;
+    }
+
+    .sp-next {
+        background: white;
+        color: #1e293b;
+        border: 1px solid #1e293b;
+        box-shadow: none;
+    }
+
+    .sp-next h2,
+    .sp-next p,
+    .sp-next-label,
+    .sp-next-facts dt,
+    .sp-next-facts dd { color: #1e293b; }
+}
